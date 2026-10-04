@@ -1,0 +1,38 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "lob"
+version = "0.1.0"
+description = "Python limit order book and matching engine with price-time priority, multiple order types, and performance benchmarking."
+readme = "README.md"
+requires-python = ">=3.12"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "CWRU Quants" }]
+dependencies = ["sortedcontainers>=2.4"]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8",
+    "hypothesis>=6",
+    "ruff>=0.6",
+    "pytest-benchmark>=4",
+]
+
+[project.scripts]
+lob = "lob.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/lob"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
